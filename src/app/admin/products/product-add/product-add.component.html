@@ -1,0 +1,65 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <mat-card-title color="primary">
+    Enter the Purchase Details
+  </mat-card-title>
+  <form (submit)= "onSaveProduct(prodForm)" #prodForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+        <input
+        matInput
+        type="text"
+        name="billno"
+        ngModel
+        required
+        placeholder="Bill Number"
+        #billno="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+        <input
+        matInput
+        type="text"
+        name="tin"
+        ngModel
+        required
+        placeholder="TIN"
+        #tin="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      name="slno"
+      ngModel
+      required
+      placeholder="Serial Number"
+      #slno="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+       matInput
+       type="date"
+       name="doi"
+       ngModel
+       required
+       placeholder="Date of Installation"
+       #doi="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      name="waranty"
+      ngModel
+      required
+      placeholder="Waranty"
+      #waranty="ngModel">
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit">Generate QR</button>
+  </form>
+
+</mat-card>
+
+

@@ -1,0 +1,26 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="suppliers.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let supplier of suppliers">
+    <mat-expansion-panel-header>
+      {{ supplier.sname }}
+    </mat-expansion-panel-header>
+    <p>
+      E-mail : {{ supplier.semail }} <br>
+      TIN    : {{ supplier.stin }} <br>
+      CST    : {{ supplier.scst }} <br>
+      Contact: {{ supplier.scontact }} <br>
+      Address: {{ supplier.saddress }}
+    </p>
+    <mat-action-row>
+      <!-- <a mat-button color="primary" [routerLink]="['/edit', supplier.id]">EDIT</a> -->
+      <button mat-button color="warn" (click)="onDelete(supplier.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator
+ [length]="totalSuppliers"
+ [pageSize]="suppliersPerPage"
+ [pageSizeOptions]="pageSizeOptions"
+ (page)="onChangedPage($event)"
+ *ngIf="suppliers.length > 0"></mat-paginator>
+<p class=" info-text mat-body-1" *ngIf="suppliers.length <= 0 && !isLoading"> No supplier added  yet</p>

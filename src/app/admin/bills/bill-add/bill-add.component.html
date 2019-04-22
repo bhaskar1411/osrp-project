@@ -1,0 +1,104 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <mat-card-title color="primary">
+    Enter the Purchase Details
+  </mat-card-title>
+  <form (submit)= "onSaveBill(billForm)" #billForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="lab"
+        [ngModel]="bill?.lab"
+        required
+        placeholder="Lab/Office"
+        #lab="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+        <input
+        matInput
+        type="text"
+        name="billno"
+        [ngModel]="bill?.billno"
+        required
+        placeholder="Bill Number"
+        #billno="ngModel">
+    </mat-form-field>
+    <!-- <mat-form-field>
+      <input
+        matInput
+        type="date"
+        name="dop"
+        [ngModel]="bill?.dop"
+        required
+        placeholder="Date of Purchase"
+        #dop="ngModel">
+    </mat-form-field> -->
+    <mat-form-field>
+        <input
+        matInput
+        type="text"
+        name="tin"
+        [ngModel]="bill?.tin"
+        required
+        placeholder="TIN"
+        #tin="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+      matInput
+      name="spec"
+      [ngModel]="bill?.spec"
+      required
+      placeholder="Specification"
+      #spec="ngModel"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      name="rate"
+      [ngModel]="bill?.rate"
+      required
+      placeholder="Rate Per Piece"
+      #rate="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      name="quantity"
+      [ngModel]="bill?.quantity"
+      required
+      placeholder="Quantity"
+      #quantity="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      name="gst"
+      [ngModel]="bill?.gst"
+      required
+      placeholder="GSt"
+      #gst="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      name="amount"
+      [ngModel]="bill?.amount"
+      required
+      placeholder="Amount"
+      #amount="ngModel">
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit">Save Bill</button>
+  </form>
+
+</mat-card>
+
+

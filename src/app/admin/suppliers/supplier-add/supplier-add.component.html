@@ -1,0 +1,72 @@
+<mat-card>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card-title>
+  Enter the Supplier Details
+</mat-card-title>
+<form (submit)="onSaveSupplier(supplierForm)" #supplierForm="ngForm" *ngIf="!isLoading">
+  <mat-form-field>
+    <input
+     matInput
+     type="text"
+     name="sname"
+     [ngModel]="supplier?.sname"
+     required
+     placeholder="Supplier Name"
+     #sname="ngModel">
+  </mat-form-field>
+  <mat-form-field>
+    <input
+     matInput
+     type="email"
+     name="semail"
+     [ngModel]="supplier?.semail"
+     required
+     placeholder="Supplier Email"
+     #semail="ngModel">
+  </mat-form-field>
+  <mat-form-field>
+    <input
+     matInput
+     type="text"
+     name="stin"
+     [ngModel]="supplier?.stin"
+     required
+     placeholder="Supplier TIN"
+     #stin="ngModel">
+  </mat-form-field>
+  <mat-form-field>
+    <input
+     matInput
+     type="text"
+     name="scst"
+     [ngModel]="supplier?.scst"
+     required
+     placeholder="Supplier CST"
+     #scst="ngModel">
+  </mat-form-field>
+  <mat-form-field>
+    <input
+     matInput
+     type="text"
+     name="scontact"
+     [ngModel]="supplier?.scontact"
+     required
+     placeholder="Supplier Contact"
+     #scontact="ngModel">
+  </mat-form-field>
+  <mat-form-field>
+   <textarea
+    matInput
+    name="saddress"
+    [ngModel]="supplier?.saddress"
+    rows="3"
+    required
+    placeholder="Supplier Address"
+    #saddress="ngModel"></textarea>
+  </mat-form-field>
+  <button
+   mat-raised-button
+   color="primary"
+   type="submit">Save Supplier</button>
+</form>
+</mat-card>

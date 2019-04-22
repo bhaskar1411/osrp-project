@@ -1,0 +1,15 @@
+const mongoose = require('mongoose');
+
+const billSchema = mongoose.Schema({
+  lab: {type: String, required: true},
+  billno: {type: String, required: true},
+ // dop: {type: Date, required: true},
+  tin: {type: String, required: true},
+  spec: {type: String, required: true},
+  rate: {type: Number, required: true},
+  quantity: {type: Number, required: true},
+  gst: {type: Number, required: true},
+  amount: {type: Number, required: true}
+});
+
+module.exports = mongoose.model('Bill', billSchema);
