@@ -1,4 +1,4 @@
-// const path = require('path');
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoClient = require('mongoose');
@@ -12,7 +12,9 @@ const billRoutes = require('./routes/bills');
 const supplierRoutes = require('./routes/suppliers');
 
 const userRoutes = require("./routes/user");
-///const userRoutes = require('./routes/user');
+
+const productRoutes = require("./routes/products");
+
 
 const app = express();
 
@@ -26,7 +28,7 @@ mongoClient.connect('mongodb://localhost:27017/osrp')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-//app.use("/images", express.static(path.join("backend/images")));
+app.use("/images", express.static(path.join("backend/images")));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin","*");
   res.setHeader(
@@ -43,7 +45,7 @@ app.use((req, res, next) => {
 
 // app.use("/api/posts", postsRoutes);
 
-app.use("/api/user", userRoutes);
+//app.use("/api/user", userRoutes);
 app.use("/api/bills", billRoutes);
 
 app.use("/api/suppliers", supplierRoutes);
@@ -51,6 +53,7 @@ app.use("/api/suppliers", supplierRoutes);
 app.use("/api/user", userRoutes);
 //app.use("/api/user", userRoutes);
 
+app.use("/api/products", productRoutes);
 
 module.exports = app;
 

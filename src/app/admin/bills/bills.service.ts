@@ -92,7 +92,7 @@ export class BillsService {
       // console.log(responseData.message);
       // this.bills.push(billData);
       // this.billsUpdated.next([...this.bills]);
-      this.router.navigate(['/']);
+      this.router.navigate(['/admin/bill-list']);
     });
   }
 
@@ -116,7 +116,7 @@ export class BillsService {
       // updatedBills[oldBillIndex] = bill;
       // this.bills = updatedBills;
       // this.billsUpdated.next([...this.bills]);
-      this.router.navigate(['/admin']);
+      this.router.navigate(['/admin/bill-list']);
     });
   }
 
