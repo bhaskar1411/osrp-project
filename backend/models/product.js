@@ -5,8 +5,8 @@ const productSchema = mongoose.Schema({
   tin: {type: Number, required: true},
   slno: {type: String, required: true},
   doi: {type: Date, required: true},
-  waranty: {type: Number, required: true}
-  //qrimagefilename: {type: String, required: true}
+  waranty: {type: Number, required: true},
+  qrimagefilename: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Product', productSchema);
