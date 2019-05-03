@@ -3,7 +3,7 @@ export interface Product {
   billno: string;
   tin: number;
   slno: string;
-  doi: Date;
+  doi: string;
   waranty: number;
   qrimagefilename: string;
 }

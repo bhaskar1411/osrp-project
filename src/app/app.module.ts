@@ -28,6 +28,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './admin/signup/signup.component';
 import { UserComponent } from './user/user.component';
 import { ProductAddComponent } from './admin/products/product-add/product-add.component';
+import { ProductListComponent } from './admin/products/product-list/product-list.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ProductAddComponent } from './admin/products/product-add/product-add.co
     LoginComponent,
     SignupComponent,
     UserComponent,
-    ProductAddComponent
+    ProductAddComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

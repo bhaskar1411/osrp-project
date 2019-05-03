@@ -9,6 +9,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './admin/signup/signup.component';
 import { UserComponent } from './user/user.component';
 import { ProductAddComponent } from './admin/products/product-add/product-add.component';
+import { ProductListComponent } from './admin/products/product-list/product-list.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
     { path: 'supplier-add', component: SupplierAddComponent},
     { path: 'supplier-list', component: SupplierListComponent},
     { path: 'signup', component: SignupComponent},
-    { path: 'product-add', component: ProductAddComponent}
+    { path: 'product-add', component: ProductAddComponent},
+    { path: 'product-list', component: ProductListComponent}
   ]},
   { path: 'edit/:billId', component: BillAddComponent},
   // { path: 'edit/:billId', component: BillAddComponent},

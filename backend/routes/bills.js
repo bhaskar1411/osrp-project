@@ -1,27 +1,53 @@
 const express = require("express");
 
 const Bill = require("../models/bill");
+const Supplier = require("../models/supplier");
 
 const router = express.Router();
 
 router.post("/", (req, res, next) => {
-  const bill = new Bill({
-    lab: req.body.lab,
-    billno: req.body.billno,
-    //dop: req.body.dop,
-    tin: req.body.tin,
-    spec: req.body.spec,
-    rate: req.body.rate,
-    quantity: req.body.quantity,
-    gst: req.body.gst,
-    amount: req.body.amount
-  });
-  bill.save().then(createdBill => {
-    res.status(201).json({
-      message: "bill added successfully",
-      billId: createdBill._id
+  Supplier.findOne({stin: req.body.tin})
+  .then(supplier => {
+    if(!supplier){
+      return res.status(200).json({
+        message: "Supplier not exist!! Please enter Supplier Details",
+        suppliertin: false
+      });
+    }
+    const bill = new Bill({
+      lab: req.body.lab,
+      billno: req.body.billno,
+      dop: req.body.dop,
+      tin: req.body.tin,
+      spec: req.body.spec,
+      rate: req.body.rate,
+      quantity: req.body.quantity,
+      gst: req.body.gst,
+      amount: req.body.amount
     });
+    bill.save();
+    res.status(200).json({
+      message: "Bill Added Successfully",
+      suppliertin: true
+      });
   });
+  // const bill = new Bill({
+  //   lab: req.body.lab,
+  //   billno: req.body.billno,
+  //   dop: req.body.dop,
+  //   tin: req.body.tin,
+  //   spec: req.body.spec,
+  //   rate: req.body.rate,
+  //   quantity: req.body.quantity,
+  //   gst: req.body.gst,
+  //   amount: req.body.amount
+  // });
+  // bill.save().then(createdBill => {
+  //   res.status(201).json({
+  //     message: "bill added successfully",
+  //     billId: createdBill._id
+  //   });
+  // });
 });
 
 router.put('/:id', (req, res, next) => {
@@ -29,7 +55,7 @@ router.put('/:id', (req, res, next) => {
     _id: req.body.id,
     lab: req.body.lab,
     billno: req.body.billno,
-   //dop: req.body.dop,
+    dop: req.body.dop,
     tin: req.body.tin,
     spec: req.body.spec,
     rate: req.body.rate,

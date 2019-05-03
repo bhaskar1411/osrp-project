@@ -27,7 +27,7 @@ export class BillsService {
         return {
           lab: bill.lab,
           billno: bill.billno,
-         // dop: bill.dop,
+          dop: bill.dop,
           tin: bill.tin,
           spec: bill.spec,
           rate: bill.rate,
@@ -59,7 +59,8 @@ export class BillsService {
       _id: string,
       lab: string,
       billno: string,
-      tin: string,
+      dop: string,
+      tin: number,
       spec: string,
       rate: number,
       quantity: number,
@@ -69,12 +70,13 @@ export class BillsService {
     );
   }
 
-  addBill(lab: string, billno: string, tin: string, spec: string,
+  addBill(lab: string, billno: string, dop: string, tin: number, spec: string,
           rate: number, quantity: number, gst: number, amount: number ) {
     const billData: Bill ={
       id: null,
       lab: lab,
       billno: billno,
+      dop: dop,
       tin: tin,
       spec: spec,
       rate: rate,
@@ -84,7 +86,7 @@ export class BillsService {
     };
 
     this.http
-    .post<{message: string, billId: string}>(
+    .post<{message: string, suppliertin: boolean}>(
       'http://localhost:3000/api/bills/', billData
     ).subscribe((responseData) => {
       // const id = responseData.billId;
@@ -92,16 +94,24 @@ export class BillsService {
       // console.log(responseData.message);
       // this.bills.push(billData);
       // this.billsUpdated.next([...this.bills]);
-      this.router.navigate(['/admin/bill-list']);
+      if (responseData.suppliertin === true){
+        window.alert(responseData.message);
+        this.router.navigate(['/admin/bill-list']);
+      }
+      if (responseData.suppliertin === false){
+        window.alert(responseData.message);
+        this.router.navigate(['/admin/supplier-add']);
+      }
     });
   }
 
-  updateBill(id: string, lab: string, billno: string, tin: string,
+  updateBill(id: string, lab: string, billno: string, dop: string, tin: number,
              spec: string, rate: number, quantity: number, gst: number, amount: number){
     const bill: Bill = {
       id: id,
       lab: lab,
       billno: billno,
+      dop: dop,
       tin: tin,
       spec: spec,
       rate: rate,

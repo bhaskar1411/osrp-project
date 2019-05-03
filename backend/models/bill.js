@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const billSchema = mongoose.Schema({
   lab: {type: String, required: true},
   billno: {type: String, required: true},
- // dop: {type: Date, required: true},
-  tin: {type: String, required: true},
+  dop: {type: String, required: true},
+  tin: {type: Number, required: true},
   spec: {type: String, required: true},
   rate: {type: Number, required: true},
   quantity: {type: Number, required: true},

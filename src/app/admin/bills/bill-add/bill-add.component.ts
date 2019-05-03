@@ -15,6 +15,7 @@ export class BillAddComponent implements OnInit {
   private mode = 'create';
   private billId: string;
   isLoading = false;
+  dop: string;
 
 
   constructor( public billService: BillsService,
@@ -33,6 +34,7 @@ export class BillAddComponent implements OnInit {
             id: billData._id,
             lab: billData.lab,
             billno: billData.billno,
+            dop: billData.dop,
             tin: billData.tin,
             spec: billData.spec,
             rate: billData.rate,
@@ -55,11 +57,12 @@ export class BillAddComponent implements OnInit {
       return;
     }
     this.isLoading = true;
+    //this.dop =  form.value.dop.toISOString(),
     if(this.mode === 'create'){
       this.billService.addBill(
         form.value.lab,
         form.value.billno,
-       // form.value.dop,
+        form.value.dop.toString(),
         form.value.tin,
         form.value.spec,
         form.value.rate,
@@ -72,7 +75,7 @@ export class BillAddComponent implements OnInit {
         this.billId,
         form.value.lab,
         form.value.billno,
-       // form.value.dop,
+        form.value.dop.toString(),
         form.value.tin,
         form.value.spec,
         form.value.rate,

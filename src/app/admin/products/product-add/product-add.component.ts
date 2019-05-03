@@ -24,7 +24,7 @@ export class ProductAddComponent implements OnInit {
       form.value.billno,
       form.value.tin,
       form.value.slno,
-      form.value.doi,
+      form.value.doi.toString(),
       form.value.waranty,
     );
     form.resetForm();

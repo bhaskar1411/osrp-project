@@ -1,0 +1,25 @@
+mat-accordion{
+  width: 80%;
+  margin: 1rem auto;
+}
+
+mat-expansion-panel {
+width: 80%;
+margin: 1rem auto;
+}
+:host {
+display: block;
+margin-top:  1rem;
+}
+
+mat-spinner {
+margin: auto;
+}
+
+.info-text {
+text-align: center;
+}
+
+mat-paginator {
+margin-top: 1rem;
+}

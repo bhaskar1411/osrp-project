@@ -2,8 +2,8 @@ export interface Bill {
   id: string;
   lab: string;
   billno: string;
- // dop: Date;
-  tin: string;
+  dop: string;
+  tin: number;
   spec: string;
   rate: number;
   quantity: number;

@@ -27,4 +27,27 @@ router.post("/qrcode",(req, res, next) => {
   });
  });
 
+ router.get('/', (req, res, next) => {
+   const pageSize = +req.query.pagesize;
+   const currentPage = +req.query.page;
+   const productQuery = Product.find();
+   let fetchedProducts;
+   if(pageSize && currentPage) {
+     productQuery
+     .skip( pageSize * (currentPage - 1))
+     .limit(pageSize);
+   }
+   productQuery.then(documents => {
+     fetchedProducts = documents;
+     return Product.countDocuments();
+   })
+   .then(count => {
+     res.status(200).json({
+       message: "products fetched successfully",
+       products: fetchedProducts,
+       maxProducts: count
+     });
+   });
+ });
+
 module.exports = router;

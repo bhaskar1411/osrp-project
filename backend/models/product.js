@@ -4,7 +4,7 @@ const productSchema = mongoose.Schema({
   billno: {type: String, required: true},
   tin: {type: Number, required: true},
   slno: {type: String, required: true},
-  doi: {type: Date, required: true},
+  doi: {type: String, required: true},
   waranty: {type: Number, required: true},
   qrimagefilename: {type: String, required: true}
 });

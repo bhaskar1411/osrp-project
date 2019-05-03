@@ -8,25 +8,23 @@ const User = require("../models/user");
 const router = express.Router();
 
 router.post("/signup", (req, res, next) => {
-  // const transporter = nodemailer.createTransport({
-  //   host: 'smtp.gmail.com',
-  //   port: 465,
-  //   secure: true,
-  //   auth: {
-  //     user: 'esarkar991@gmail.com',
-  //     pass: ''
-  //   }
-  // });
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'esarkar991@gmail.com',
+      pass: 'bhaskar@14'
+    }
+  });
 
-  // const mailOptions = {
-  //   from: 'esarkar991@gmail.com',
-  //   to: req.body.email,
-  //   subject: 'Online Stock Register Portal',
-  //   text: 'Welcome to the Online Stock Register Portal.'
-  // };
-  // transporter.sendMail(mailOptions).then(result => {
-  //   console.log(result);
-  // });
+  const mailOptions = {
+    from: 'esarkar991@gmail.com',
+    to: req.body.email,
+    subject: 'Online Stock Register Portal',
+    text: 'Welcome to the Online Stock Register Portal. The username: '+ req.body.email + ' password: '+req.body.password+'.'
+  };
+  transporter.sendMail(mailOptions);
 
   bcrypt.hash(req.body.password, 10).then(hash => {
     const user = new User({
