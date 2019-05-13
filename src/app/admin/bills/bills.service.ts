@@ -5,6 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+import { environment } from 'src/environments/environment';
+
+
+const BACKEND_URL = environment.apiUrl + '/bills/';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +24,7 @@ export class BillsService {
     const queryParams = `?pagesize=${billsPerPage}&page=${currentPage}`;
     this.http
     .get<{message: string, bills: any, maxBills: number}>(
-      'http://localhost:3000/api/bills/' + queryParams
+      BACKEND_URL + queryParams
     )
     .pipe(
       map(billData => {
@@ -66,7 +71,26 @@ export class BillsService {
       quantity: number,
       gst: number,
       amount: number }>(
-        'http://localhost:3000/api/bills/' + id
+        BACKEND_URL + id
+    );
+  }
+
+  getBillbybillno(billno: string) {
+    console.log(billno);
+    return this.http
+    .get<{
+      _id: string,
+      lab: string,
+      billno: string,
+      dop: string,
+      tin: number,
+      spec: string,
+      rate: number,
+      quantity: number,
+      gst: number,
+      amount: number
+    }>(
+      BACKEND_URL + billno
     );
   }
 
@@ -84,16 +108,12 @@ export class BillsService {
       gst: gst,
       amount: amount
     };
+    console.log(billData);
 
     this.http
     .post<{message: string, suppliertin: boolean}>(
-      'http://localhost:3000/api/bills/', billData
+      BACKEND_URL, billData
     ).subscribe((responseData) => {
-      // const id = responseData.billId;
-      // billData.id = id;
-      // console.log(responseData.message);
-      // this.bills.push(billData);
-      // this.billsUpdated.next([...this.bills]);
       if (responseData.suppliertin === true){
         window.alert(responseData.message);
         this.router.navigate(['/admin/bill-list']);
@@ -119,25 +139,15 @@ export class BillsService {
       gst: gst,
       amount: amount
     };
-    this.http.put('http://localhost:3000/api/bills/' + id, bill)
+    this.http.put(BACKEND_URL + id, bill)
     .subscribe(response => {
-      // const updatedBills = [...this.bills];
-      // const oldBillIndex = updatedBills.findIndex(b => b.id === bill.id);
-      // updatedBills[oldBillIndex] = bill;
-      // this.bills = updatedBills;
-      // this.billsUpdated.next([...this.bills]);
       this.router.navigate(['/admin/bill-list']);
     });
   }
 
   deleteBill(billId: string) {
      return this.http
-     .delete('http://localhost:3000/api/bills/' + billId);
-    // .subscribe(() => {
-    //   const updatedBills = this.bills.filter(bill => bill.id !== billId);
-    //   this.bills = updatedBills;
-    //   this.billsUpdated.next([...this.bills]);
-    // });
+     .delete(BACKEND_URL + billId);
   }
 
 }

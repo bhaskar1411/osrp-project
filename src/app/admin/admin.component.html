@@ -26,7 +26,9 @@
       <a mat-button routerLink="signup" routerLinkActive="mat-primary" >Signup</a>
     </li>
     <li>
-      <a mat-button routerLink="logout" routerLinkActive="mat-primary" (click)="onLogout()" >Logout</a>
+      <button
+       mat-button
+       (click)="onLogout()">Logout</button>
     </li>
   </ul>
 </mat-toolbar>

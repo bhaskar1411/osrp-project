@@ -1,83 +1,21 @@
 const express = require("express");
 
-const Supplier = require('../models/supplier');
+const SupplierController = require("../controllers/suppliers");
+
+const checkAuth = require("../middleware/check-auth");
 
 const router = express.Router();
 
-router.post("/", (req, res, next) => {
-  const supplier = new Supplier({
-    sname: req.body.sname,
-    semail: req.body.semail,
-    stin: req.body.stin,
-    scst: req.body.scst,
-    scontact: req.body.scontact,
-    saddress: req.body.saddress
-  });
-  supplier.save();
-  res.status(201).json({
-    message: "supplier added successfully"
-  });
-});
+router.post("/", checkAuth, SupplierController.addSupplier);
 
-router.put('/:id', (req, res, next) => {
-  const supplier = new Supplier({
-    _id: req.body.id,
-    sname: req.body.sname,
-    semail: req.body.semail,
-    stin: req.body.stin,
-    scst: req.body.scst,
-    scontact: req.body.scontact,
-    saddress: req.body.saddress
-  });
-  Supplier.updateOne({_id: req.params.id}, supplier).then(result => {
-    res.status(200).json({
-      message: "update successful"
-    });
-  });
-});
+router.put('/:id', checkAuth, SupplierController.updateSupplier);
 
-router.get('/', (req, res, next) => {
-  const pageSize = +req.query.pagesize;
-  const currentPage = +req.query.page;
-  const supplierQuery = Supplier.find();
-  let fetchedSuppliers;
-  if(pageSize && currentPage) {
-    supplierQuery
-    .skip( pageSize * (currentPage - 1))
-    .limit(pageSize);
-  }
-  supplierQuery.then(documents => {
-    fetchedSuppliers = documents;
-    return Supplier.countDocuments();
-  })
-  .then(count => {
-    res.status(200).json({
-      message: "suppliers fetched successfully",
-      suppliers: fetchedSuppliers,
-      maxSuppliers: count
-    });
-  });
-});
+router.get('/', checkAuth, SupplierController.getSuppliers);
 
-router.get('/:id', (req, res, next) => {
-  Supplier.findById(req.params.id).then(supplier => {
-    if(supplier) {
-      res.status(200).json(supplier);
-    } else {
-      res.status(404).json({
-        message: "supplier not found!!"
-      });
-    }
-  });
-});
+router.get('/:id', checkAuth, SupplierController.getOneSupplier);
 
-router.delete("/:id", (req, res, next) => {
-  Supplier.deleteOne({_id: req.params.id}).then(result => {
-    console.log(result);
-    res.status(200).json({
-      message: "supplier deleted"
-    });
-  });
-});
+router.get('/:stin', checkAuth, SupplierController.getSupplierbyTIN);
+
+router.delete("/:id", checkAuth, SupplierController.deleteSupplier);
 
 module.exports = router;

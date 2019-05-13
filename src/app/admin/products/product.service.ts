@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl + '/products/';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +23,7 @@ export class ProductService {
     const queryParams = `?pagesize=${productsPerPage}&page=${currentPage}`;
     this.http
     .get<{message: string, products: any, maxProducts: number}>(
-      'http://localhost:3000/api/products/' + queryParams
+      BACKEND_URL + queryParams
     )
     .pipe(
       map(productData => {
@@ -61,10 +65,26 @@ export class ProductService {
       qrimagefilename: null
     };
     this.http.post<{message: string}>(
-      'http://localhost:3000/api/products/qrcode', productData
+      BACKEND_URL, productData
     ).subscribe((responseData) => {
       //window.alert(responseData.message);
       this.router.navigate(['/admin']);
     });
   }
+
+  getProduct(slno: string) {
+    return this.http
+    .get<{
+      _id: string,
+      billno: string,
+      tin: number,
+      slno: string,
+      doi: string,
+      waranty: number,
+      qrimagefilename: string
+    }>(
+      BACKEND_URL + slno
+    );
+  }
+
 }

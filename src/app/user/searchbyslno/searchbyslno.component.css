@@ -1,0 +1,27 @@
+mat-card {
+  width: 60%;
+  /* margin: 1rem auto; */
+  margin: 1rem auto;
+}
+mat-form-field {
+  width: 100%;
+
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-accordion{
+  width: 60%;
+  margin: 1rem auto;
+}
+
+mat-expansion-panel {
+width: 60%;
+margin: 1rem auto;
+}
+:host {
+display: block;
+margin-top:  1rem;
+}

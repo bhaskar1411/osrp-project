@@ -10,29 +10,35 @@ import { SignupComponent } from './admin/signup/signup.component';
 import { UserComponent } from './user/user.component';
 import { ProductAddComponent } from './admin/products/product-add/product-add.component';
 import { ProductListComponent } from './admin/products/product-list/product-list.component';
+import { AuthGuard } from './auth/auth.guard';
+import { SearchbyslnoComponent } from './user/searchbyslno/searchbyslno.component';
+import { ScanQrComponent } from './user/scanQr/scan-qr/scan-qr.component';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'admin', component: AdminComponent, children: [
-    { path: 'bill-add', component: BillAddComponent},
-    { path: 'bill-list', component: BillListComponent},
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: [
+    { path: 'bill-add', component: BillAddComponent, canActivate: [AuthGuard] },
+    { path: 'bill-list', component: BillListComponent, canActivate: [AuthGuard] },
    // { path: 'edit/:billId', component: BillAddComponent},
-    { path: 'supplier-add', component: SupplierAddComponent},
-    { path: 'supplier-list', component: SupplierListComponent},
-    { path: 'signup', component: SignupComponent},
-    { path: 'product-add', component: ProductAddComponent},
-    { path: 'product-list', component: ProductListComponent}
+    { path: 'supplier-add', component: SupplierAddComponent, canActivate: [AuthGuard]},
+    { path: 'supplier-list', component: SupplierListComponent, canActivate: [AuthGuard]},
+    { path: 'signup', component: SignupComponent, canActivate:[AuthGuard]},
+    { path: 'product-add', component: ProductAddComponent, canActivate:[AuthGuard]},
+    { path: 'product-list', component: ProductListComponent, canActivate:[AuthGuard]}
   ]},
-  { path: 'edit/:billId', component: BillAddComponent},
+  { path: 'edit/:billId', component: BillAddComponent, canActivate: [AuthGuard]},
   // { path: 'edit/:billId', component: BillAddComponent},
-
   //{ path: 'edit/:supplierId', component: SupplierAddComponent}
-  { path: 'user', component: UserComponent}
+  { path: 'user', component: UserComponent, canActivate:[AuthGuard], children: [
+    { path: 'searchbyslno', component: SearchbyslnoComponent},
+    { path: 'scan-qr', component: ScanQrComponent }
+  ]}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
+  exports: [RouterModule],
+  providers: [AuthGuard]
+ })
 export class AppRoutingModule { }

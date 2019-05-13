@@ -23,7 +23,7 @@ export class SupplierListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.supplierService.getSuppliers(this.suppliersPerPage,this.currentPage);
+    this.supplierService.getSuppliers(this.suppliersPerPage, this.currentPage);
     this.suppliersSub = this.supplierService.getSupplierUpdateListener()
     .subscribe((supplierData: {suppliers: Supplier[], supplierCount: number}) => {
       this.isLoading = false;

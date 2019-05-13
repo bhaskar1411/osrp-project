@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { NgForm } from '@angular/forms';
+import { UserService } from './user.service';
+
 
 @Component({
   selector: 'app-user',
@@ -8,12 +12,14 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  private isFetch = false;
+
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   onLogout() {
-    this.router.navigate(['/']);
+    this.authService.logout();
   }
 }

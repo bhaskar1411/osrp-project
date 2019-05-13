@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl + '/suppliers/';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +24,7 @@ export class SupplierService {
     const queryParams = `?pagesize=${suppliersPerPage}&page=${currentPage}`;
     this.http
     .get<{message: string, suppliers: any, maxSuppliers: number}>(
-      'http://localhost:3000/api/suppliers/' + queryParams
+      BACKEND_URL + queryParams
     )
     .pipe(
       map(supplierData => {
@@ -61,7 +65,21 @@ export class SupplierService {
       scst: string,
       scontact: number,
       saddress: string }>(
-        'http://localhost:3000/api/suppliers/' + id
+        BACKEND_URL + id
+      );
+  }
+
+  getSupplierByTIN(stin: number) {
+    return this.http
+    .get<{
+      _id: string,
+      sname: string,
+      semail: string,
+      stin: number,
+      scst: string,
+      scontact: number,
+      saddress: string}>(
+        BACKEND_URL + stin
       );
   }
 
@@ -76,10 +94,10 @@ export class SupplierService {
       saddress: saddress
     };
     this.http.post<{message: string}>(
-      'http://localhost:3000/api/suppliers/', supplierData
+      BACKEND_URL, supplierData
     ).subscribe((responseData) => {
       console.log(responseData.message);
-      this.router.navigate(['/supplier-list']);
+      this.router.navigate(['/admin/supplier-list']);
     });
   }
 
@@ -95,7 +113,7 @@ export class SupplierService {
       saddress: saddress
     };
     this.http.put(
-      'http://localhost:3000/api/suppliers/' + id, supplier
+      BACKEND_URL + id, supplier
     ).subscribe(response => {
       this.router.navigate(['/supplier-list']);
     });
@@ -103,7 +121,7 @@ export class SupplierService {
 
   deleteSupplier(supplierId: string) {
     return this.http
-    .delete('http://localhost:3000/api/suppliers/' + supplierId);
+    .delete(BACKEND_URL + supplierId);
   }
 
 }

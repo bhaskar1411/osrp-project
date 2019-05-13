@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onFetch(slnoform)" #slnoform="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+       matInput
+       type="text"
+       name="slno"
+       ngModel
+       placeholder="Serial Number"
+       #slno="ngModel" required>
+       <mat-error *ngIf="slno.invalid">Please enter a valid Serial Number</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      *ngIf="!isLoading">Submit</button>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+  </form>
+</mat-card>
+
+<mat-accordion multi="true" *ngIf="isFetch">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Product Detail
+    </mat-expansion-panel-header>
+    <p>
+      Billno.: {{product.billno}} <br>
+      TIN: {{product.tin}} <br>
+      SLno: {{product.slno}} <br>
+      DoI: {{product.doi}}  <br>
+      Waranty: {{product.waranty}} <br>
+      filename: {{product.qrimagefilename}}
+    </p>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
