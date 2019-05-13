@@ -115,7 +115,7 @@ exports.deleteBill = (req, res, next) => {
     });
   });
 }
-
+//get by bill number
 exports.getBillbybillno = (req, res, next) => {
   console.log(req.params.billno);
   Bill.findOne({billno: req.params.billno}).then(bill => {
